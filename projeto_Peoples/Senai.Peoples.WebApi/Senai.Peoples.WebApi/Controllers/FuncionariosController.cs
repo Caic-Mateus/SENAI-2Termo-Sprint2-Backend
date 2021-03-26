@@ -83,5 +83,57 @@ namespace Senai.Peoples.WebApi.Controllers
 
             return StatusCode(201);
         }
-    }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            // Faz a chamada para o metodo .Deletar()
+            _funcionarioRepository.Deletar(id);
+
+            // Retorna um status code 204 - No Content
+            return StatusCode(204);
+        }
+        /// <summary>
+        /// Atualiza um funcionario passando o seu id pela url da requisição
+        /// </summary>
+        /// <param name="id">id do funcionario que será atualizado</param>
+        /// <param name="funcionarioAtualizado">objeto funcionario atualizado com as novas informaçoes </param>
+        /// <returns>status code</returns>
+        /// ///  // http://localhost:5000/api/generos/1
+        [HttpPut("{id}")]
+        public IActionResult PutIdUrl(int id, FuncionarioDomain funcionarioAtualizado)
+        {
+            // Cria o objeto que ira receber o funcionario buscado no banco de dados
+            FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(id);
+
+            // Caso não for encontrado retorna NotFound com uma mensagem personalizada
+            // e um bool para apresentar que houve erro
+            if (funcionarioBuscado == null)
+            {
+                return NotFound
+                    (
+                    new
+                    {
+                        mensagem = "Funcionario não encontrado!",
+                        erro = true
+                    }
+
+                   );
+            }
+            // Tenta atualizar o registro
+            try
+            {
+                // Faz a chamada para o metod .AtualizarIdUrl
+                _funcionarioRepository.AtualizarIdUrl(id, funcionarioAtualizado);
+
+                //Retorna um status code 204 - No Content
+                return NoContent();
+            }
+            //Caso ocorra algum erro
+            catch (Exception codErro)
+            {
+                // Retorna um status code 400 - CadRequest e o codigo do erro
+                return BadRequest(codErro);
+            }
+        }
+        }
 }

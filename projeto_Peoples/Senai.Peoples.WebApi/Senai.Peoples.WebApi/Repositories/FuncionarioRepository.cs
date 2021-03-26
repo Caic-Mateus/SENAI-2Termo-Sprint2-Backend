@@ -23,9 +23,23 @@ namespace Senai.Peoples.WebApi.Repositories
             throw new NotImplementedException();
         }
 
-        public void AtualizarIdUrl(int id, FuncionarioDomain genero)
+        public void AtualizarIdUrl(int id, FuncionarioDomain funcionario)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdateIdUrl = "UPDATE Funcionarios SET Nome = @Nome, Sobrenome =  @Sobrenome WHERE idFuncionario = @ID";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdateIdUrl, con))
+                {
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.Parameters.AddWithValue("Nome", funcionario.nome);
+                    cmd.Parameters.AddWithValue("Sobrenome", funcionario.sobrenome);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public FuncionarioDomain BuscarPorId(int id)
@@ -89,7 +103,7 @@ namespace Senai.Peoples.WebApi.Repositories
             {
 
                 // Declara a query que será executada
-                string queryInsert = "INSERT INTO Funcionarios(Nome) VALUES (@Nome), (Sobrenome) (@Sobrenome)";
+                string queryInsert = "INSERT INTO Funcionarios (Nome, Sobrenome) VALUES (@Nome, @Sobrenome)";
 
                 // Declara o SqlCommand cmd passando a query que será executada e a conexão como parametros
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
@@ -110,7 +124,23 @@ namespace Senai.Peoples.WebApi.Repositories
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                // Declara a query a ser executada passando o parametro @ID
+                string queryDelete = "DELETE FROM Funcionarios WHERE idFuncionario = @ID";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    // Define o valor do id recebido no metodo como o valor de parametro
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    // Abre a conexao com o Banco de Dados
+                    con.Open();
+
+                    //Executa o comando
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<FuncionarioDomain> ListarTodos()
