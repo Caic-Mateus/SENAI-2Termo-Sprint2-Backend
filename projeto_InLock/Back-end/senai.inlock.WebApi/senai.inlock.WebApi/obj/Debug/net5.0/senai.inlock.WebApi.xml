@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>senai.inlock.WebApi</name>
+    </assembly>
+    <members>
+        <member name="P:senai.inlock.WebApi.Controllers.EstudiosController._estudioRepository">
+            <summary>
+            Objeto _estudioRepository que irá receber todos os métodos definidos na interface 
+            </summary>
+        </member>
+        <member name="M:senai.inlock.WebApi.Controllers.EstudiosController.#ctor">
+            <summary>
+            Instancia o objeto _funcionarioRepository para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:senai.inlock.WebApi.Controllers.EstudiosController.PutIdUrl(System.Int32,senai.inlock.WebApi.Domains.EstudioDomain)">
+            <summary>
+            Atualiza um estudio passando o seu id pela url da requisição
+            </summary>
+            <param name="id">id do estudio que será atualizado</param>
+            <param name="estudioAtualizado">objeto estudio atualizado com as novas informaçoes </param>
+            <returns>status code</returns>
+            ///  // http://localhost:5000/api/generos/1
+        </member>
+        <member name="P:senai.inlock.WebApi.Controllers.JogosController._jogoRepository">
+            <summary>
+            Objeto _estudioRepository que irá receber todos os métodos definidos na interface 
+            </summary>
+        </member>
+        <member name="M:senai.inlock.WebApi.Controllers.JogosController.#ctor">
+            <summary>
+            Instancia o objeto _funcionarioRepository para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+    </members>
+</doc>
