@@ -178,7 +178,7 @@ namespace senai.hroads.WebApi.Contexts
                     .IsUnicode(false)
                     .HasColumnName("senha");
 
-                entity.HasOne(d => d.IdTipoUsuarioNavigation)
+                entity.HasOne(d => d.TipoUsuario)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsuario)
                     .HasConstraintName("FK__Usuario__idTipoU__4BAC3F29");
