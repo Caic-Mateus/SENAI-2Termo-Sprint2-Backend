@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>senai.hroads.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:senai.hroads.WebApi.Controllers.LoginController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.hroads.WebApi.Controllers.TipoUsuariosController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.hroads.WebApi.Controllers.UsuariosController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="F:senai.hroads.WebApi.Repositories.UsuarioRepository.ctx">
+            <summary>
+            Objeto contexto por onde serão chamados os métodos do EF Core
+            </summary>
+        </member>
+        <member name="P:senai_hroads_webApi.Controllers.ClassesController._classeRepository">
+            <summary>
+            Objeto _classeRepository que irá receber todos os métodos definidos na interface IClasseRepository
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.#ctor">
+            <summary>
+            Instancia o objeto _classeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.Get">
+            <summary>
+            Lista todos as classes
+            </summary>
+            <returns>Uma lista de classes e um status code 200 - Ok</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.Post(senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Cadastra uma nova classe
+            </summary>
+            <param name="novaClasse">Objeto novaClasse que será cadastrado</param>
+            <returns>Um status code 201 - Created</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.Delete(System.Int32)">
+            <summary>
+            Deleta uma classe existente
+            </summary>
+            <param name="id">ID da classe que será deletada</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.Put(System.Int32,senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Atualiza uma classe existente
+            </summary>
+            <param name="id">ID da classe que será atualizada</param>
+            <param name="estudioAtualizado">Objeto classeAtualizada com as novas informações</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.ClassesController.GetById(System.Int32)">
+            <summary>
+            Busca uma classe através do seu ID
+            </summary>
+            <param name="id">ID da classe que será buscada</param>
+            <returns>Uma classe buscada e um status code 200 - Ok</returns>
+        </member>
+        <member name="P:senai_hroads_webApi.Controllers.HabilidadesController._habilidadeRepository">
+            <summary>
+            Objeto _habilidadeRepository que irá receber todos os métodos definidos na interface IHabilidadeRepository
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.Get">
+            <summary>
+            Lista todos as habilidades
+            </summary>
+            <returns>Uma lista de habilidades e um status code 200 - Ok</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.Post(senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Cadastra uma nova habilidade
+            </summary>
+            <param name="novaClasse">Objeto novaHabilidade que será cadastrado</param>
+            <returns>Um status code 201 - Created</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.Delete(System.Int32)">
+            <summary>
+            Deleta uma habilidade existente
+            </summary>
+            <param name="id">ID da habilidade que será deletada</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.Put(System.Int32,senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Atualiza uma habilidade existente
+            </summary>
+            <param name="id">ID da habilidade que será atualizada</param>
+            <param name="estudioAtualizado">Objeto habilidadeAtualizada com as novas informações</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.HabilidadesController.GetById(System.Int32)">
+            <summary>
+            Busca uma habilidade através do seu ID
+            </summary>
+            <param name="id">ID da habilidade que será buscada</param>
+            <returns>Uma habilidade buscada e um status code 200 - Ok</returns>
+        </member>
+        <member name="P:senai_hroads_webApi.Controllers.PersonagensController._personagemRepository">
+            <summary>
+            Objeto _habilidadeRepository que irá receber todos os métodos definidos na interface IHabilidadeRepository
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Controllers.PersonagensController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="T:senai_hroads_webApi.Interfaces.IClasseRepository">
+            <summary>
+            Interface responsável pelo ClasseRepository
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IClasseRepository.ListarTodas">
+            <summary>
+            Lista todas as Classes
+            </summary>
+            <returns>Retorna uma lista de classes </returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IClasseRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma classe pelo id
+            </summary>
+            <param name="id">Id da classe buscada</param>
+            <returns>Classe buscada</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IClasseRepository.Cadastrar(senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Cadastra uma nova classe
+            </summary>
+            <param name="novaClase"> Objeto novaClasse que será cadastrada</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IClasseRepository.Atualizar(System.Int32,senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Atualiza uma classe já existente
+            </summary>
+            <param name="id">id da classe que será atualizada</param>
+            <param name="classeAtualizada"> objeto classeAtualizada com as novas informações</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IClasseRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma classe existente
+            </summary>
+            <param name="id">Id da classe que será deletada</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IHabilidadeRepository.ListarTodas">
+            <summary>
+            Lista todas as Habilidades
+            </summary>
+            <returns>Retorna uma lista de habilidades </returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IHabilidadeRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma habilidade pelo id
+            </summary>
+            <param name="id">Id da habilidade buscada</param>
+            <returns>Habilidade buscada</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IHabilidadeRepository.Cadastrar(senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Cadastra uma nova habilidade
+            </summary>
+            <param name="novaHabilidade"> Objeto novaHabilidade que será cadastrada</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IHabilidadeRepository.Atualizar(System.Int32,senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Atualiza uma habilidade já existente
+            </summary>
+            <param name="id">id da habilidade que será atualizada</param>
+            <param name="habilidadeAtualizada"> objeto habilidadeAtualizada com as novas informações</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IHabilidadeRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma habilidade existente
+            </summary>
+            <param name="id">Id da habilidade que será deletada</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IPersonagemRepository.ListarTodos">
+            <summary>
+            Lista todas os Personagens
+            </summary>
+            <returns>Retorna uma lista de personagens </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:senai_hroads_webApi.Interfaces.IPersonagemRepository.BuscarPorId(System.Int32)" -->
+        <member name="M:senai_hroads_webApi.Interfaces.IPersonagemRepository.Cadastrar(senai.hroads.WebApi.Domains.Personagem)">
+            <summary>
+            Cadastra um novo personagem
+            </summary>
+            <param name="novaHabilidade"> Objeto novoPersonagem que será cadastrada</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IPersonagemRepository.Atualizar(System.Int32,senai.hroads.WebApi.Domains.Personagem)">
+            <summary>
+            Atualiza um personagem já existente
+            </summary>
+            <param name="id">id do personagem que será atualizado</param>
+            <param name="habilidadeAtualizada"> objeto personagemAtualizado com as novas informações</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Interfaces.IPersonagemRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um personagem existente
+            </summary>
+            <param name="id">Id do personagem que será deletado</param>
+        </member>
+        <member name="F:senai_hroads_webApi.Repositories.ClasseRepository.ctx">
+            <summary>
+            Objeto contexto por onde serão chamados os métodos do EF Core
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.ClasseRepository.Atualizar(System.Int32,senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Atualiza uma classe existente
+            </summary>
+            <param name="id">ID da classe que será atualizada</param>
+            <param name="classeAtualizada">Objeto classeAtualizada com as novas informações</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.ClasseRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma classe através do seu ID
+            </summary>
+            <param name="id">ID da classe que será buscada</param>
+            <returns>Uma classe buscada</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.ClasseRepository.Cadastrar(senai.hroads.WebApi.Domains.Classe)">
+            <summary>
+            Cadastra uma nova classe
+            </summary>
+            <param name="novaClasse">Objeto novaClasse que será cadastrado</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.ClasseRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma classe existente
+            </summary>
+            <param name="id">ID da classe que será deletada</param>
+        </member>
+        <member name="F:senai_hroads_webApi.Repositories.HabilidadeRepository.ctx">
+            <summary>
+            Objeto contexto por onde serão chamados os métodos do EF Core
+            </summary>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.HabilidadeRepository.Atualizar(System.Int32,senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Atualiza uma habilidade existente
+            </summary>
+            <param name="id">ID da habilidade que será atualizada</param>
+            <param name="classeAtualizada">Objeto habilidadeAtualizada com as novas informações</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.HabilidadeRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma habilidade através do seu ID
+            </summary>
+            <param name="id">ID da habilidade que será buscada</param>
+            <returns>Uma habilidade buscada</returns>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.HabilidadeRepository.Cadastrar(senai.hroads.WebApi.Domains.Habilidade)">
+            <summary>
+            Cadastra uma nova habilidade
+            </summary>
+            <param name="novaHabilidade">Objeto novaHabilidade que será cadastrado</param>
+        </member>
+        <member name="M:senai_hroads_webApi.Repositories.HabilidadeRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma habilidade existente
+            </summary>
+            <param name="id">ID da habilidade que será deletada</param>
+        </member>
+        <member name="F:senai_hroads_webApi.Repositories.PersonagemRepository.ctx">
+            <summary>
+            Objeto contexto por onde serão chamados os métodos do EF Core
+            </summary>
+        </member>
+    </members>
+</doc>

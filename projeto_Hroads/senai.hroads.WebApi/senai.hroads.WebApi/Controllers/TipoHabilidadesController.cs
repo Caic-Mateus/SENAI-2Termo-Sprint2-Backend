@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.hroads.WebApi.Domains;
 using senai.hroads.WebApi.Repositories;
@@ -39,6 +40,7 @@ namespace senai.hroads.WebApi.Controllers
             return StatusCode(204);
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(TipoHabilidade cadastrarTipoHabilidade)
         {

@@ -52,7 +52,7 @@ namespace senai.inlock.WebApi.Controllers
                     issuer: "InLock.webAPI",       //emissor do token
                     audience: "InLock.webAPI",    // destinatatio do token
                     claims: claims,               // dados definidos acima (linha 45)
-                    expires: DateTime.Now8.AddMinutes(5),   // tempo de expiração
+                    expires: DateTime.Now.AddMinutes(5),   // tempo de expiração
                     signingCredentials: credentials    //credenciais do token
                 );
 

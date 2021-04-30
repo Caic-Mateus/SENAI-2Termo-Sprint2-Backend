@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.hroads.WebApi.Domains;
 using senai.hroads.WebApi.Interfaces;
@@ -33,6 +34,7 @@ namespace senai.hroads.WebApi.Controllers
             return Ok(_usuarioRepository.Listar());
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(Usuario novoUsuario)
         {
@@ -69,5 +71,7 @@ namespace senai.hroads.WebApi.Controllers
             // Retorna a resposta da requisição fazendo a chamada o método
             return Ok(_usuarioRepository.BuscarPorId(id));
         }
+
+       
     }
 }

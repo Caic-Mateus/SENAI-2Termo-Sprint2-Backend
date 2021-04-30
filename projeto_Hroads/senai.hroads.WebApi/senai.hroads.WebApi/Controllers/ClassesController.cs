@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.hroads.WebApi.Domains;
 using senai_hroads_webApi.Interfaces;
@@ -50,6 +51,7 @@ namespace senai_hroads_webApi.Controllers
         /// </summary>
         /// <param name="novaClasse">Objeto novaClasse que será cadastrado</param>
         /// <returns>Um status code 201 - Created</returns>
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(Classe novaClasse)
         {

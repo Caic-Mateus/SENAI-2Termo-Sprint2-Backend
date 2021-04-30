@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace senai.hroads.WebApi
@@ -19,6 +22,8 @@ namespace senai.hroads.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
+
+
             .AddNewtonsoftJson(options =>
             {
                 // Ignora os loopings nas consultas
@@ -27,50 +32,49 @@ namespace senai.hroads.WebApi
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
 
-            services
-               // Define a forma de autenticação
-               .AddAuthentication(options =>
-               {
-                   options.DefaultAuthenticateScheme = "JwtBearer";
-                   options.DefaultChallengeScheme = "JwtBearer";
-               })
-               //Define os parametros de validação do token
-               .AddJwtBearer("JwtBearer", options =>
-               {
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Hroads.webApi",
+                    Version = "v1",
+                    Description = "Essa API foi feita com objetivo de aprimorar meu " +
+                    "conhecimentos no desenvolvimento das mesmas, utilizando Entity Framework, DbFirst  ",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Caic Mateus",
+                        Email = string.Empty,
 
+                    }
+                });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            }
+                );
 
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                        // quem estta emitindo
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
 
+                .AddJwtBearer("JwtBearer", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
                         ValidateIssuer = true,
-
-                        // quem esta recebendo
                         ValidateAudience = true,
-
-                        // o tempo de expiração
                         ValidateLifetime = true,
-
-                        //forma de criptografia e a chave de autenticação
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("senha")),
-
-                        //tempo de expiração do token
-                        ClockSkew = TimeSpan.FromMinutes(30),
-
-                        //nome do issuer, de onde está vindo
-
-                        ValidIssuer = "Hroads.webAPI",
-
-                        // nome do audiemce, para onde esta indo
-                        ValidAudience = "Hroads.webAPI"
-
-
-
-                   };
-
-               });
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("hroads-chave-autenticacao")),
+                        ClockSkew = TimeSpan.FromMinutes(5),
+                        ValidIssuer = "Hroads.webApi",
+                        ValidAudience = "Hroads.webApi"
+                    };
+                });
         }
-    
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -82,13 +86,19 @@ namespace senai.hroads.WebApi
 
             app.UseRouting();
 
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
 
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hroads.webApi");
+                c.RoutePrefix = string.Empty;
+            });
 
-
-            // Habilita a autenticação
             app.UseAuthentication();
 
-            // Habilita a autorização
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

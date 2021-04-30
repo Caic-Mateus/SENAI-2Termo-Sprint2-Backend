@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.hroads.WebApi.Domains;
 using senai.hroads.WebApi.Interfaces;
@@ -34,6 +35,7 @@ namespace senai.hroads.WebApi.Controllers
             return Ok(_tipousuarioRepository.Listar());
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(TipoUsuario novoTipo)
         {
