@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>senai.spmedicalgroup.webApi</name>
+    </assembly>
+    <members>
+        <member name="M:senai.spmedicalgroup.webApi.Controllers.ClinicasController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.spmedicalgroup.webApi.Controllers.ConsultasController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.spmedicalgroup.webApi.Controllers.LoginController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.spmedicalgroup.webApi.Controllers.TiposUsuariosController.#ctor">
+            <summary>
+            Instancia o objeto _habilidadeRepository para que haja a referência aos métodos do repositório
+            </summary>
+        </member>
+        <member name="M:senai.spmedicalgroup.webApi.Interfaces.IConsultaRepository.Cadastrar(senai.spmedicalgroup.webApi.Domains.Consultum)">
+            <summary>
+            Agenda uma nova consulta
+            </summary>
+            <param name="novaConsulta">objeto com os dados da nova consulta</param>
+        </member>
+        <member name="M:senai.spmedicalgroup.webApi.Interfaces.IConsultaRepository.ListarMinhas(System.Int32)">
+            <summary>
+            Lista as consultas do paciente logado
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
