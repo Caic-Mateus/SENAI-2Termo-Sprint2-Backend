@@ -17,6 +17,6 @@ namespace senai.spmedicalgroup.webApi.Domains
         public string TituloTipoUsuario { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
-        public ClaimsIdentity Permissao { get; internal set; }
+        
     }
 }

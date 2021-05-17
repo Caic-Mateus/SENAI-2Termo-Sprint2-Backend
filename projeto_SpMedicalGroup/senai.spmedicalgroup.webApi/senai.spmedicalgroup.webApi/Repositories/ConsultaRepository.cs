@@ -26,9 +26,15 @@ namespace senai.spmedicalgroup.webApi.Repositories
 
             public void Cadastrar(Consultum novaConsulta)
             {
-                ctx.Consulta.Add(novaConsulta);
+            // Outra forma, caso os dados da inscrição (novaa consulta) sejam enviados pelo usuario
+            // independente do status que o usuario tente cadastrar ao se inscrever
+            // por padrão, a situação será sempre "Não confirmada"
+            //novaConsulta.IdSituacaoNavigation.Situacao1 = "Não confirmada";
+            
+            // adiciona uma nova presença
+            ctx.Consulta.Add(novaConsulta);
 
-
+            // Salva as informações no banco de dados
                 ctx.SaveChanges();
 
             }
@@ -50,7 +56,29 @@ namespace senai.spmedicalgroup.webApi.Repositories
 
         public void StatusConsulta(int id, string status)
         {
-            throw new NotImplementedException();
+            Consultum consultabuscada = ctx.Consulta
+                .Include(c => c.IdPacienteNavigation)
+                .Include(c => c.IdMedicoNavigation)
+                .FirstOrDefault(c => c.IdConsulta == id);
+
+            switch (status)
+            {
+                case "0":
+                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Cancelada";
+                    break;
+                case "1":
+                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Confirmada";
+                    break;
+
+                case "2":
+                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Agendada";
+                    break;
+                default:
+                    consultabuscada.IdSituacaoNavigation.Situacao1 = consultabuscada.IdSituacaoNavigation.Situacao1;
+                    break;
+            }
+            ctx.    Consulta.Update(consultabuscada);
+            ctx.SaveChanges();
         }
     }
     }

@@ -17,12 +17,17 @@ namespace senai.spmedicalgroup.webApi.Interfaces
         /// <summary>
         /// Lista as consultas do paciente logado
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">id do usuario que tem as consultas</param>
+        /// <returns>lista as consultas</returns>
         List<Consultum> ListarMinhas(int id);
 
         Consultum BuscarPorId(int id);
 
+        /// <summary>
+        /// Altera o status de uma consulta
+        /// </summary>
+        /// <param name="id">ID da consulta que sera alterada</param>
+        /// <param name="status">Parametro que atualiza a situação da presença para 1- confirmada 0-recusada 3- nao confirmada</param>
         void StatusConsulta(int id, string status);
       
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.spmedicalgroup.webApi.Domains;
 using senai.spmedicalgroup.webApi.Interfaces;
@@ -25,24 +26,61 @@ namespace senai.spmedicalgroup.webApi.Controllers
         {
             _consultaRepository = new ConsultaRepository();
         }
+
+        /// <summary>
+        /// Lista todas as consultas de um determinado usuario
+        /// </summary>
+        /// <returns>lista de consultas e um status code 200</returns>
         [HttpGet("paciente")]
         public IActionResult GetPac()
         {
             try
             {
+                // Cria uma variavel que recebe o valor do ID do usuario que está logado
                 int id = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+                //retotna 200 ok e a lista 
                 return Ok(_consultaRepository.ListarMinhas(id));
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
 
                 return BadRequest(new
                 {
-                    mensagem = "",
-                    ex
+                    mensagem = "Não é possivel mostrar as consultas se não estiver logado",
+                    erro
                 });
             }
 
+        }
+
+       [HttpPost("agendar")]
+       public IActionResult Agendar(Consultum novaConsulta)
+        {
+            try
+            {
+                Consultum agendar = new Consultum()
+                {
+                    IdPaciente = novaConsulta.IdPaciente,
+                    IdMedico = novaConsulta.IdMedico,
+                    DataConsulta = novaConsulta.DataConsulta,
+                    IdSituacao = novaConsulta.IdSituacao
+
+
+
+                };
+                _consultaRepository.Cadastrar(agendar);
+
+                return StatusCode(201);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possivel agendar uma consulta sem estar logado",
+                    erro
+                });
+                
+            }
         }
 
         [HttpPost]
@@ -53,6 +91,24 @@ namespace senai.spmedicalgroup.webApi.Controllers
 
 
             return StatusCode(201);
+        }
+
+        //[Authorize(Roles = "1")]
+        [HttpPatch("{id}")]
+
+        public IActionResult UpdateSituacao(int id, Consultum status)
+        {
+            try
+            {
+                _consultaRepository.StatusConsulta(id, status.IdSituacaoNavigation.Situacao1);
+
+                return StatusCode(204);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
     }
 }

@@ -8,6 +8,6 @@ namespace senai.spmedicalgroup.webApi.Interfaces
 {
     interface IUsuarioRepository
     {
-        Usuario Login(string email, string senha);
+        Usuario Logar(string email, string senha);
     }
 }
