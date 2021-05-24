@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.spmedicalgroup.webApi.Domains;
 using senai.spmedicalgroup.webApi.Interfaces;
@@ -25,6 +26,7 @@ namespace senai.spmedicalgroup.webApi.Controllers
             _tipousuarioRepository = new TipoUsuarioRepository();
         }
 
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(TipoUsuario novoTipo)
         {

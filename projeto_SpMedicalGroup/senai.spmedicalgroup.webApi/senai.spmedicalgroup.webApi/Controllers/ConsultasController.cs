@@ -31,6 +31,7 @@ namespace senai.spmedicalgroup.webApi.Controllers
         /// Lista todas as consultas de um determinado usuario
         /// </summary>
         /// <returns>lista de consultas e um status code 200</returns>
+        [Authorize(Roles = "2, 3")]
         [HttpGet("paciente")]
         public IActionResult GetPac()
         {
@@ -53,7 +54,8 @@ namespace senai.spmedicalgroup.webApi.Controllers
 
         }
 
-       [HttpPost("agendar")]
+        [Authorize(Roles = "1")]
+        [HttpPost("agendar")]
        public IActionResult Agendar(Consultum novaConsulta)
         {
             try
@@ -93,14 +95,14 @@ namespace senai.spmedicalgroup.webApi.Controllers
             return StatusCode(201);
         }
 
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpPatch("{id}")]
 
         public IActionResult UpdateSituacao(int id, Consultum status)
         {
             try
             {
-                _consultaRepository.StatusConsulta(id, status.IdSituacaoNavigation.Situacao1);
+                _consultaRepository.StatusConsulta(id, status.IdSituacao.ToString());
 
                 return StatusCode(204);
             }
@@ -110,5 +112,6 @@ namespace senai.spmedicalgroup.webApi.Controllers
                 return BadRequest(erro);
             }
         }
+
     }
 }

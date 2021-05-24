@@ -63,18 +63,18 @@ namespace senai.spmedicalgroup.webApi.Repositories
 
             switch (status)
             {
-                case "0":
-                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Cancelada";
-                    break;
                 case "1":
-                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Confirmada";
+                    consultabuscada.IdSituacao = 1;
+                    break;
+                case "2":
+                    consultabuscada.IdSituacao = 2;
                     break;
 
-                case "2":
-                    consultabuscada.IdSituacaoNavigation.Situacao1 = "Agendada";
+                case "3":
+                    consultabuscada.IdSituacao = 3;
                     break;
                 default:
-                    consultabuscada.IdSituacaoNavigation.Situacao1 = consultabuscada.IdSituacaoNavigation.Situacao1;
+                    consultabuscada.IdSituacao = consultabuscada.IdSituacao;
                     break;
             }
             ctx.    Consulta.Update(consultabuscada);
