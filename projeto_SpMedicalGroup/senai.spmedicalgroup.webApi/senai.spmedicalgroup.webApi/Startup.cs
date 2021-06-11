@@ -31,6 +31,16 @@ namespace senai.spmedicalgroup.webApi
                 // Ignora valores nulos ao fazer junções nas consultas
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                builder => {
+                    builder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                }
+                );
+            });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -83,6 +93,7 @@ namespace senai.spmedicalgroup.webApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

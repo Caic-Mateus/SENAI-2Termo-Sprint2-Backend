@@ -21,8 +21,8 @@ namespace senai.spmedicalgroup.webApi.Repositories
 
             public Consultum BuscarPorId(int id)
             {
-                throw new NotImplementedException();
-            }
+            return ctx.Consulta.FirstOrDefault(x => x.IdConsulta == id);
+        }
 
             public void Cadastrar(Consultum novaConsulta)
             {
@@ -78,6 +78,23 @@ namespace senai.spmedicalgroup.webApi.Repositories
                     break;
             }
             ctx.    Consulta.Update(consultabuscada);
+            ctx.SaveChanges();
+        }
+
+        // Método para inserir ou editar uma descrição nas consultas
+        public void InserirDescricao (int id, Consultum descricao, int idUsuario )
+        {
+            Consultum consultaBuscada = ctx.Consulta.FirstOrDefault(x => x.IdConsulta == id);
+
+            Medico medicoBuscado = ctx.Medicos.FirstOrDefault(x => x.IdUsuario == idUsuario);
+
+            if (descricao.Descricao != null && consultaBuscada.IdMedico == medicoBuscado.IdMedico)
+            {
+                consultaBuscada.Descricao = descricao.Descricao;
+            }
+
+            ctx.Consulta.Update(consultaBuscada);
+
             ctx.SaveChanges();
         }
     }

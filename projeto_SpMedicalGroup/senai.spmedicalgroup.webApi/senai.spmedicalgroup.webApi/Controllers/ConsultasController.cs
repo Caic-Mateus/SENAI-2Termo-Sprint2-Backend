@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using senai.spmedicalgroup.webApi.Domains;
 using senai.spmedicalgroup.webApi.Interfaces;
 using senai.spmedicalgroup.webApi.Repositories;
+using senai.spmedicalgroup.webApi.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -56,7 +57,7 @@ namespace senai.spmedicalgroup.webApi.Controllers
 
         [Authorize(Roles = "1")]
         [HttpPost("agendar")]
-       public IActionResult Agendar(Consultum novaConsulta)
+        public IActionResult Agendar(Consultum novaConsulta)
         {
             try
             {
@@ -81,7 +82,7 @@ namespace senai.spmedicalgroup.webApi.Controllers
                     mensagem = "Não é possivel agendar uma consulta sem estar logado",
                     erro
                 });
-                
+
             }
         }
 
@@ -110,6 +111,36 @@ namespace senai.spmedicalgroup.webApi.Controllers
             {
 
                 return BadRequest(erro);
+                   }
+        }
+
+        
+        [Authorize(Roles = "2")]
+        [HttpPatch("descricao/{id}")]
+        public IActionResult PatchDesc(int id, ConsultumViewModel descricaoAtualizado)
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                Consultum consultaBuscada = _consultaRepository.BuscarPorId(id);
+
+                if (consultaBuscada != null)
+                {
+                    consultaBuscada = new Consultum
+                    {
+                        Descricao = descricaoAtualizado.descricao
+                    };
+
+                    _consultaRepository.InserirDescricao(id, consultaBuscada, idUsuario);
+
+                    return StatusCode(204);
+                }
+                return BadRequest("Nenhuma consulta encontrada!");
+            }
+            catch (Exception codErro)
+            {
+                return BadRequest(codErro);
             }
         }
 

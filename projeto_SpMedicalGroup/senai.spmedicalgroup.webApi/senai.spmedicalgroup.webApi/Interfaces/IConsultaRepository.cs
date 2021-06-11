@@ -33,6 +33,9 @@ namespace senai.spmedicalgroup.webApi.Interfaces
 
         void Atualizar(int id, Consultum consultaAtualizada);
 
+        void InserirDescricao(int id, Consultum descricao, int idUsuario);
+
+
         void Deletar(int id);
 
     }
